@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Book</title>
+</head>
+<body>
+<p th:text="'Hello' + ${student.name}" />
+
+<table>
+    <thead>
+        <th>Strings</th>
+    </thead>
+    <tbody>
+        <tr th:each="string: ${list}">
+            <td><span th:text="${string}"></span></td>
+        </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
