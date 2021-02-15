@@ -6,18 +6,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Author {
+public class Client {
 
     @Id
     @GeneratedValue
     private Long id;
 
+
     @Column
     private String name;
 
-    public Author(){};
-
-    public Author(String name) {
+    public Client(Long id, String name) {
+        this.id = id;
         this.name = name;
     }
 
@@ -35,13 +35,5 @@ public class Author {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return "Author{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
     }
 }

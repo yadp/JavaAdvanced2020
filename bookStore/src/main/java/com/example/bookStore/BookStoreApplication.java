@@ -5,6 +5,7 @@ import com.example.bookStore.model.Book;
 import com.example.bookStore.repo.AuthorRepo;
 import com.example.bookStore.repo.BookRepo;
 import com.example.bookStore.repo.OpenLibRepo;
+import com.example.bookStore.service.BookService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,24 +20,26 @@ public class BookStoreApplication {
 
 
 	@Bean
-	public CommandLineRunner demo(BookRepo bookRepo, AuthorRepo authorRepo, OpenLibRepo openLibRepo){
+	public CommandLineRunner demo(BookRepo bookRepo, AuthorRepo authorRepo, OpenLibRepo openLibRepo, BookService bookService){
 		return (args)->{
 			System.out.println("test");
 			Author author=new Author("TestAuthor");
-			authorRepo.save(author);
+			//author.setId(5L);
 
-			bookRepo.save(new Book("21231231",author,"TestName"));
-			bookRepo.save(new Book("21231231",author,"TestName2"));
 
-			System.out.println(bookRepo.findByIsbn("0140328726"));
+			bookService.createBook(new Book("21231231",author,"TestName"));
+			bookService.createBook(new Book("312312",author,"Test Mr. Fox"));
 
-			Book book = openLibRepo.findByIsbn("0140328726");
-			System.out.println(book);
+			bookService.updatePrice(2L,2.0);
+			bookService.addBookQuantity(2L,20);
+			bookService.sellBook(2L,10);
 
-			bookRepo.save(book);
 
-			System.out.println(bookRepo.findByIsbn("0140328726"));
 
+			bookService.getBookByIsbn("0140328726");
+
+
+			System.out.println("Found book: "+bookService.getBookByNamePart("Mr. Fox"));
 
 		};
 	}

@@ -19,6 +19,12 @@ public class Book {
     @Column
     private String name;
 
+    @Column
+    private Double price;
+
+    @Column
+    private int quantity;
+
     public Book(){
 
     }
@@ -36,6 +42,22 @@ public class Book {
     public Book(OpenLibBook openLibBook){
         this.name = openLibBook.getTitle();
         this.isbn = openLibBook.getIsbn()[0];
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public Long getId() {
@@ -70,6 +92,17 @@ public class Book {
         this.name = name;
     }
 
+    public void sellBook(int quantity) throws IllegalArgumentException{
+        if (this.quantity >= quantity){
+            this.quantity=this.quantity-quantity;
+        } else {
+            throw new IllegalArgumentException("Not enought books");
+        }
+    }
+
+    public void addBook(int quantity){
+        this.quantity=this.quantity+quantity;
+    }
     @Override
     public String toString() {
         return "Book{" +
