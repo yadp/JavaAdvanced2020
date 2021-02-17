@@ -18,7 +18,7 @@ public interface BookService {
      * @param book
      * @return
      */
-    boolean createBook( Book book );
+    Book createBook( Book book );
 
     /**
      *
@@ -26,7 +26,7 @@ public interface BookService {
      * @param newPrice
      * @return
      */
-    boolean updatePrice( Long id, Double newPrice);
+    Book updatePrice( Long id, Double newPrice);
 
     /**
      *
@@ -67,5 +67,11 @@ public interface BookService {
      * @return
      */
     Book getBookByIsbn(String isbn);
+
+    /**
+     *
+     * @param id
+     */
+    void deleteBook(Long id);
 
 }

@@ -24,34 +24,35 @@ public class BookServiceImpl implements BookService{
     private AuthorRepo authorRepo;
 
     @Override
-    public boolean createBook(Book book) {
+    public Book createBook(Book book) {
 
         if ((book.getAuthor().getId()!=null
                 && !authorRepo.existsById(book.getAuthor().getId()))
         || book.getAuthor().getId()==null){
             book.setAuthor(authorRepo.save(book.getAuthor()));
         }
-        if(bookRepo.save(book)!= null) {
-            return true;
-        }else {
-            return false;
+
+        if(book.getId()!=null && bookRepo.findById(book.getId())!=null){
+            book.setId(null);
         }
+        return bookRepo.save(book);
+
+
 
     }
 
     @Override
-    public boolean updatePrice(Long id, Double newPrice) {
+    public synchronized Book updatePrice(Long id, Double newPrice) {
         if(newPrice < 0 ){
-            return false;
+            return null;
         }
         Optional<Book> optionalBook = bookRepo.findById(id);
         if(!optionalBook.isEmpty()){
             Book book = optionalBook.get();
             book.setPrice(newPrice);
-            bookRepo.save(book);
-            return true;
+            return bookRepo.save(book);
         } else {
-            return false;
+            return  null;
         }
     }
 
@@ -99,7 +100,7 @@ public class BookServiceImpl implements BookService{
             Book book = optionalBook.get();
             return book;
         } else {
-            return null;
+            throw new NullPointerException("Book not found from Service");
         }
     }
 
@@ -121,6 +122,11 @@ public class BookServiceImpl implements BookService{
             bookLocal = bookRepo.save(openLibRepo.findByIsbn(isbn));
         }
         return bookLocal;
+    }
+
+    @Override
+    public void deleteBook(Long id) {
+        bookRepo.deleteById(id);
     }
 
 }
