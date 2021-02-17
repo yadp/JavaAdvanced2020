@@ -30,6 +30,9 @@ public class AuthorController {
 
     @PostMapping("/")
     public @ResponseBody Author createAuthor(@RequestBody Author author){
+        if( author.getName() == null){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Didn't include author name");
+        }
         return authorService.saveAuthor(author);
     }
 
