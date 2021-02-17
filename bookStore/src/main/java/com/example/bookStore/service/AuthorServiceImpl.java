@@ -28,9 +28,9 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public boolean saveAuthor(Author author) {
-        authorRepo.save(author);
-        return true;
+    public Author saveAuthor(Author author) {
+
+        return authorRepo.save(author);
     }
 
     @Override
@@ -39,7 +39,8 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public void updateAuthor(Author author) {
+    public Author updateAuthor(Author author) {
         authorRepo.save(author);
+        return author;
     }
 }

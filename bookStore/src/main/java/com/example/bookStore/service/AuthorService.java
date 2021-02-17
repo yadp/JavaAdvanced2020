@@ -13,10 +13,10 @@ public interface AuthorService {
 
     List<Author> getAuthorByPartName(String name);
 
-    boolean saveAuthor(Author author);
+    Author saveAuthor(Author author);
     void deleteAuthor(Long id);
 
-    void updateAuthor(Author author);
+    Author updateAuthor(Author author);
 
 
 }
