@@ -19,12 +19,12 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "client_id")
-    private Client client;
+    private User user;
 
-    public Order(Book book, int quantity, Client client) {
+    public Order(Book book, int quantity, User user) {
         this.book = book;
         this.quantity = quantity;
-        this.client = client;
+        this.user = user;
     }
 
     public Long getId() {
@@ -51,11 +51,11 @@ public class Order {
         this.quantity = quantity;
     }
 
-    public Client getClient() {
-        return client;
+    public User getClient() {
+        return user;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public void setClient(User user) {
+        this.user = user;
     }
 }
